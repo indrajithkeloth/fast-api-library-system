@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>Checkout a Book</title></head>
+<body>
+  <h1>Checkout a Book</h1>
+  {% if error %}
+  <p style="color:red;">{{error}}</p>
+  {% endif %}
+  <form method="post">
+    <label>Book:
+      <select name="book_id" required>
+        {% for book in books %}
+          <option value="{{book.id}}">{{book.title}} by {{book.author}}</option>
+        {% endfor %}
+      </select>
+    </label><br><br>
+    <label>Member:
+      <select name="member_id" required>
+        {% for member in members %}
+          <option value="{{member.id}}">{{member.name}} ({{member.email}})</option>
+        {% endfor %}
+      </select>
+    </label><br><br>
+    <button type="submit">Checkout</button>
+  </form>
+  <br><a href="/checkouts">Back to Checkouts</a>
+</body>
+</html>

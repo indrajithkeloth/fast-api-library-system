@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><title>Members</title></head>
+<body>
+  <h1>Members</h1>
+  <a href="/members/add">Add Member</a>
+  <table border="1" cellpadding="5">
+    <tr><th>ID</th><th>Name</th><th>Email</th><th>Actions</th></tr>
+    {% for member in members %}
+    <tr>
+      <td>{{member.id}}</td>
+      <td>{{member.name}}</td>
+      <td>{{member.email}}</td>
+      <td>
+        <a href="/members/delete/{{member.id}}" onclick="return confirm('Delete member?')">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  <br><a href="/">Home</a>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>Checkouts</title></head>
+<body>
+  <h1>Checkouts</h1>
+  <a href="/checkouts/add">Checkout a Book</a>
+  <table border="1" cellpadding="5">
+    <tr><th>ID</th><th>Book</th><th>Member</th><th>Checkout Date</th><th>Return Date</th><th>Actions</th></tr>
+    {% for item in checkouts %}
+    <tr>
+      <td>{{item.checkout.id}}</td>
+      <td>{{item.book.title if item.book else "Unknown"}}</td>
+      <td>{{item.member.name if item.member else "Unknown"}}</td>
+      <td>{{item.checkout.checkout_date.strftime("%Y-%m-%d %H:%M:%S")}}</td>
+      <td>{{item.checkout.return_date.strftime("%Y-%m-%d %H:%M:%S") if item.checkout.return_date else "Not returned"}}</td>
+      <td>
+        {% if not item.checkout.return_date %}
+        <a href="/checkouts/return/{{item.checkout.id}}" onclick="return confirm('Return book?')">Return</a>
+        {% else %}
+        Returned
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  <br><a href="/">Home</a>
+</body>
+</html>
